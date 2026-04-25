@@ -1,5 +1,6 @@
 <?php
-// ── Conexión MySQLi (para APIs legacy) ───────────────────────────────────────
+ob_start();
+
 $servername = "fdb1032.atspace.me";
 $username   = "4714565_terrorblog";
 $password   = "E8mVrv2JPURX3DW";
@@ -11,7 +12,6 @@ if ($conn->connect_error) {
 }
 $conn->set_charset("utf8mb4");
 
-// ── Conexión PDO (para Auth y panel admin) ────────────────────────────────────
 function getDB() {
     static $pdo = null;
     if ($pdo === null) {
@@ -33,8 +33,7 @@ function getDB() {
     return $pdo;
 }
 
-// ── Constantes ────────────────────────────────────────────
-define('SITE_URL', 'http://terrorblog.atspace.cc');
+define('SITE_URL',         'http://terrorblog.atspace.cc');
 define('SESSION_NAME',     'td_sess');
 define('SESSION_LIFETIME', 7200);
 define('UPLOAD_DIR',       __DIR__ . '/../uploads/');
@@ -44,7 +43,6 @@ define('ALLOWED_IMAGES',   ['jpg','jpeg','png','gif','webp']);
 
 date_default_timezone_set('America/Mexico_City');
 
-// ── Helpers ───────────────────────────────────────────────
 function sanitize($v) {
     if (is_array($v)) return array_map('sanitize', $v);
     return htmlspecialchars(strip_tags(trim($v)), ENT_QUOTES, 'UTF-8');
@@ -65,7 +63,11 @@ function formatDate($d) {
     return strtr(date('d \d\e F, Y', strtotime($d)), $m);
 }
 
-function redirect($url) { header("Location: $url"); exit(); }
+function redirect($url) {
+    ob_end_clean();
+    header("Location: $url");
+    exit();
+}
 
 function _sess() {
     if (session_status() === PHP_SESSION_NONE) {
