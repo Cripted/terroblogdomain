@@ -1,49 +1,49 @@
+<?php
+require_once '../config/auth.php';
+$auth->requireRole('editor');
+$user  = $auth->getCurrentUser();
+$flash = getFlashMessage();
+
+try {
+    $db = getDB();
+    $totalArticulos  = $db->query("SELECT COUNT(*) FROM articulos  WHERE publicado = TRUE")->fetchColumn();
+    $totalBorradores = $db->query("SELECT COUNT(*) FROM articulos  WHERE publicado = FALSE")->fetchColumn();
+    $totalDiscus     = $db->query("SELECT COUNT(*) FROM discusiones WHERE aprobado = TRUE")->fetchColumn();
+    $totalUsuarios   = $db->query("SELECT COUNT(*) FROM usuarios   WHERE activo = TRUE")->fetchColumn();
+} catch (Exception $e) {
+    $totalArticulos = $totalBorradores = $totalDiscus = $totalUsuarios = '—';
+}
+
+try {
+    $ultimosArticulos = $db->query("
+        SELECT a.id, a.titulo, a.slug, a.publicado, a.fecha_publicacion, a.vistas,
+               c.nombre as categoria, u.nombre_completo as autor
+        FROM articulos a
+        LEFT JOIN categorias c ON a.categoria_id = c.id
+        LEFT JOIN usuarios   u ON a.autor_id = u.id
+        ORDER BY a.fecha_publicacion DESC
+        LIMIT 10
+    ")->fetchAll();
+} catch (Exception $e) {
+    $ultimosArticulos = [];
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Admin - TERROR DIGITAL</title>
+    <title>Dashboard - Admin | TERROR DIGITAL</title>
     <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Nosifer&family=Crimson+Text:wght@400;600;700&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/admin.css">
 </head>
 <body>
 <div class="grain"></div>
 
-<?php
-require_once '../config/auth.php';
-$auth->requireRole('editor');       // redirige si no tiene sesión o no es editor/admin
-$user = $auth->getCurrentUser();
+<div class="admin-layout">
+    <?php include 'partials/sidebar.php'; ?>
 
-// ── Mensajes flash ────────────────────────────────────────────────────────────
-$flash = getFlashMessage();
-?>
-
-<div class="admin-wrapper">
-
-    <!-- TOP BAR -->
-    <div class="admin-topbar">
-        <a href="../index.html" class="logo-small">TERROR DIGITAL</a>
-        <div class="user-info">
-            <span>👤 <?= htmlspecialchars($user['nombre_completo'] ?? $user['username']) ?></span>
-            <a href="logout.php" class="btn-logout">Cerrar sesión</a>
-        </div>
-    </div>
-
-    <!-- NAV TABS -->
-    <nav class="admin-nav">
-        <a href="index.php"    class="active">Dashboard</a>
-        <a href="articulos.php">Artículos</a>
-        <a href="nuevo_articulo.php">+ Nuevo artículo</a>
-        <a href="discusiones.php">Discusiones</a>
-        <?php if ($auth->hasRole('admin')): ?>
-        <a href="usuarios.php">Usuarios</a>
-        <a href="juegos.php">Juegos</a>
-        <?php endif; ?>
-        <a href="../index.html" target="_blank">Ver sitio</a>
-    </nav>
-
-    <!-- MAIN -->
     <main class="admin-main">
 
         <?php if ($flash): ?>
@@ -52,24 +52,15 @@ $flash = getFlashMessage();
         </div>
         <?php endif; ?>
 
-        <h2 style="font-family:'Creepster',cursive;color:var(--blood-red);font-size:2rem;margin-bottom:1.5rem;letter-spacing:.15rem;">
-            Dashboard
-        </h2>
+        <div class="admin-header">
+            <div>
+                <h1>🏠 Dashboard</h1>
+                <p>Bienvenido, <?= htmlspecialchars($user['nombre_completo'] ?? $user['username']) ?></p>
+            </div>
+            <a href="../index.html" target="_blank" class="btn-sm">Ver sitio →</a>
+        </div>
 
-        <!-- Estadísticas rápidas -->
-        <?php
-        try {
-            $db = getDB();
-
-            $totalArticulos  = $db->query("SELECT COUNT(*) FROM articulos  WHERE publicado = TRUE")->fetchColumn();
-            $totalBorradores = $db->query("SELECT COUNT(*) FROM articulos  WHERE publicado = FALSE")->fetchColumn();
-            $totalDiscus     = $db->query("SELECT COUNT(*) FROM discusiones WHERE aprobado = TRUE")->fetchColumn();
-            $totalUsuarios   = $db->query("SELECT COUNT(*) FROM usuarios   WHERE activo = TRUE")->fetchColumn();
-        } catch (Exception $e) {
-            $totalArticulos = $totalBorradores = $totalDiscus = $totalUsuarios = '—';
-        }
-        ?>
-
+        <!-- Estadísticas -->
         <div class="admin-stats">
             <div class="admin-stat-card">
                 <div class="big"><?= $totalArticulos ?></div>
@@ -93,33 +84,17 @@ $flash = getFlashMessage();
         <div class="admin-panel">
             <h3>Acciones Rápidas</h3>
             <div style="display:flex;gap:1rem;flex-wrap:wrap;">
-                <a href="nuevo_articulo.php"  class="btn btn-primary">✏️ Escribir artículo</a>
-                <a href="articulos.php"        class="btn btn-secondary">📋 Ver artículos</a>
-                <a href="discusiones.php"      class="btn btn-secondary">💬 Moderar discusiones</a>
+                <a href="nuevo_articulo.php" class="btn btn-primary">✏️ Escribir artículo</a>
+                <a href="articulos.php"      class="btn btn-secondary">📋 Ver artículos</a>
+                <a href="discusiones.php"    class="btn btn-secondary">💬 Moderar discusiones</a>
                 <?php if ($auth->hasRole('admin')): ?>
-                <a href="usuarios.php"         class="btn btn-secondary">👥 Gestionar usuarios</a>
-                <a href="juegos.php"           class="btn btn-secondary">🎮 Gestionar juegos</a>
+                <a href="usuarios.php"       class="btn btn-secondary">👥 Gestionar usuarios</a>
+                <a href="juegos.php"         class="btn btn-secondary">🎮 Gestionar juegos</a>
                 <?php endif; ?>
             </div>
         </div>
 
         <!-- Últimos artículos -->
-        <?php
-        try {
-            $ultimosArticulos = $db->query("
-                SELECT a.id, a.titulo, a.slug, a.publicado, a.fecha_publicacion, a.vistas,
-                       c.nombre as categoria, u.nombre_completo as autor
-                FROM articulos a
-                LEFT JOIN categorias c ON a.categoria_id = c.id
-                LEFT JOIN usuarios   u ON a.autor_id = u.id
-                ORDER BY a.fecha_publicacion DESC
-                LIMIT 10
-            ")->fetchAll();
-        } catch (Exception $e) {
-            $ultimosArticulos = [];
-        }
-        ?>
-
         <div class="admin-panel">
             <h3>Últimos Artículos</h3>
             <?php if (empty($ultimosArticulos)): ?>
@@ -144,7 +119,7 @@ $flash = getFlashMessage();
                             <td><?= htmlspecialchars($art['titulo']) ?></td>
                             <td><?= htmlspecialchars($art['categoria'] ?? '—') ?></td>
                             <td><?= htmlspecialchars($art['autor'] ?? '—') ?></td>
-                            <td><?= date('d/m/Y', strtotime($art['fecha_publicacion'])) ?></td>
+                            <td><?= $art['fecha_publicacion'] ? date('d/m/Y', strtotime($art['fecha_publicacion'])) : '—' ?></td>
                             <td><?= number_format($art['vistas']) ?></td>
                             <td>
                                 <span class="badge <?= $art['publicado'] ? 'badge-published' : 'badge-draft' ?>">
@@ -153,7 +128,9 @@ $flash = getFlashMessage();
                             </td>
                             <td style="white-space:nowrap;">
                                 <a href="editar_articulo.php?id=<?= $art['id'] ?>" class="btn btn-sm btn-secondary">✏️ Editar</a>
-                                <a href="../pages/articulo.html?id=<?= $art['slug'] ?>" target="_blank" class="btn btn-sm btn-secondary">👁️ Ver</a>
+                                <?php if ($art['publicado']): ?>
+                                <a href="../pages/articulo.html?id=<?= htmlspecialchars($art['slug']) ?>" target="_blank" class="btn btn-sm btn-secondary">👁️ Ver</a>
+                                <?php endif; ?>
                                 <button onclick="eliminarArticulo(<?= $art['id'] ?>, this)" class="btn btn-sm btn-danger">🗑️</button>
                             </td>
                         </tr>
@@ -165,7 +142,7 @@ $flash = getFlashMessage();
         </div>
 
     </main>
-</div><!-- /.admin-wrapper -->
+</div>
 
 <script>
 function eliminarArticulo(id, btn) {
