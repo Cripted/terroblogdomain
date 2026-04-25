@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias - TERROR DIGITAL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Nosifer&family=Crimson+Text:wght@400;600;700&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .news-hero {
+            background: linear-gradient(135deg, rgba(139,0,0,.3), rgba(26,0,51,.8));
+            border: 1px solid var(--blood-red);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+        .news-hero-badge { 
+            display: inline-block;
+            background: var(--accent-crimson);
+            color: #fff;
+            font-family: 'Rubik', sans-serif;
+            font-size: .7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .15rem;
+            padding: .3rem .8rem;
+            margin-bottom: 1rem;
+            animation: pulse-red 2s infinite;
+        }
+        @keyframes pulse-red {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(220,20,60,.4); }
+            50% { box-shadow: 0 0 0 6px rgba(220,20,60,0); }
+        }
+        .news-hero h2 { font-size: 2rem; margin-bottom: .8rem; color: var(--ghost-white); line-height: 1.3; }
+        .news-hero p { color: #bbb; line-height: 1.7; margin-bottom: 1rem; }
+        .news-hero-img {
+            background: linear-gradient(135deg, #1a0033, #0a0a0a);
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            border: 1px solid var(--fog-gray);
+        }
+        .filter-tabs {
+            display: flex;
+            gap: .5rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+        .filter-tab {
+            background: transparent;
+            border: 1px solid var(--fog-gray);
+            color: #aaa;
+            font-family: 'Rubik', sans-serif;
+            font-size: .8rem;
+            text-transform: uppercase;
+            letter-spacing: .07rem;
+            padding: .4rem 1rem;
+            cursor: pointer;
+            transition: all .2s;
+        }
+        .filter-tab:hover, .filter-tab.active {
+            background: var(--blood-red);
+            border-color: var(--blood-red);
+            color: #fff;
+        }
+        .article-card { cursor: default; }
+        .article-card .article-thumbnail {
+            font-size: 3.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .news-meta-bar {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            margin-bottom: .4rem;
+        }
+        .news-tag {
+            font-family: 'Rubik', sans-serif;
+            font-size: .68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .08rem;
+            padding: .2rem .6rem;
+            border: 1px solid;
+        }
+        .tag-breaking { color: var(--accent-crimson); border-color: var(--accent-crimson); background: rgba(220,20,60,.08); }
+        .tag-update   { color: #4af; border-color: #4af; background: rgba(68,170,255,.08); }
+        .tag-rumor    { color: #fa4; border-color: #fa4; background: rgba(255,170,68,.08); }
+        .tag-indie    { color: #4d4; border-color: #4d4; background: rgba(68,220,68,.08); }
+        .tag-anuncio  { color: #a4f; border-color: #a4f; background: rgba(170,68,255,.08); }
+        .tag-evento   { color: #f4a; border-color: #f4a; background: rgba(255,68,170,.08); }
+        @media (max-width: 768px) {
+            .news-hero { grid-template-columns: 1fr; }
+            .news-hero-img { height: 160px; font-size: 4rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="container">
+    <header></header>
+
+    <div class="page-header">
+        <h1 class="section-title">Noticias del Inframundo</h1>
+        <p class="page-description">Las últimas noticias del mundo del terror gaming — actualizadas constantemente</p>
+    </div>
+
+    <!-- Noticia destacada -->
+    <div class="news-hero">
+        <div>
+            <span class="news-tag tag-breaking">🔴 Última hora</span>
+            <h2>Silent Hill f: Konami revela la primera imagen oficial del remake ambientado en el Japón de los años 60</h2>
+            <p>Konami ha sorprendido a todos con el anuncio oficial de <em>Silent Hill f</em>, una nueva entrega de la saga que abandona Occidente para sumergirse en el Japón de la posguerra. Las primeras capturas muestran una estética radicalmente distinta, con criaturas inspiradas en el folclore japonés y un pueblo envuelto en niebla entre campos de arroz. Ryukishi07, el creador de <em>Higurashi</em>, firma el guion.</p>
+            <p class="meta" style="color:#666;font-family:'Rubik',sans-serif;font-size:.85rem;">📅 15 de Abril, 2026 · ✍️ Redacción Terror Digital · 👁️ 18,432 vistas</p>
+            <a href="#" class="read-more">Leer noticia completa →</a>
+        </div>
+        <div class="news-hero-img">🎌</div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="filter-tabs">
+        <button class="filter-tab active" onclick="filterNews('all', this)">Todas</button>
+        <button class="filter-tab" onclick="filterNews('breaking', this)">Breaking</button>
+        <button class="filter-tab" onclick="filterNews('update', this)">Actualizaciones</button>
+        <button class="filter-tab" onclick="filterNews('rumor', this)">Rumores</button>
+        <button class="filter-tab" onclick="filterNews('indie', this)">Indie</button>
+        <button class="filter-tab" onclick="filterNews('anuncio', this)">Anuncios</button>
+    </div>
+
+    <section class="latest-section">
+        <div class="articles-grid" id="articles-container">
+
+            <!-- Noticia 1 -->
+            <article class="article-card" data-cat="update">
+                <div class="article-thumbnail">🧟</div>
+                <div class="article-body">
+                    <div class="news-meta-bar">
+                        <span class="news-tag tag-update">Actualización</span>
+                    </div>
+                    <h3>Resident Evil 9 entra oficialmente en producción según registros de Capcom</h3>
+                    <p class="meta">12 de Abril, 2026 · 👁️ 9,210 vistas</p>
+                    <p class="excerpt">Documentos internos de Capcom filtrados en la base de datos del gobierno japonés revelan el inicio de producción de la novena entrega principal. El proyecto, con nombre en clave "Existence", apuntaría a 2028 como fecha de lanzamiento y volvería a los orígenes con un protagonista inédito.</p>
+                    <a href="#" class="read-more">Leer más →</a>
+                </div>
+            </article>
+
+            <!-- Noticia 2 -->
+            <article class="article-card" data-cat="anuncio">
+                <div class="article-thumbnail">🎮</div>
+                <div class="article-body">
+                    <div class="news-meta-bar">
+                        <span class="news-tag tag-anuncio">Anuncio</span>
+                    </div>
+                    <h3>Frictional Games anuncia SOMA 2: "el juego más ambicioso que hemos hecho"</h3>
+                    <p class="meta">10 de Abril, 2026 · 👁️ 14,870 vistas</p>
+                    <p class="excerpt">Los creadores de Amnesia han confirmado oficialmente la secuela de SOMA, su aclamada aventura de ciencia ficción y terror existencial. En una entrada de blog, los desarrolladores prometen un mundo más grande, mayor libertad de exploración y una narrativa que "hará replantearte qué significa estar vivo".</p>
+                    <a href="#" class="read-more">Leer más →</a>
+                </div>
+            </article>
+
+            <!-- Noticia 3 -->
+            <article class="article-card" data-cat="breaking">
+                <div class="article-thumbnail">👻</div>
+                <div class="article-body">
+                    <div class="news-meta-bar">
+                        <span class="news-tag tag-breaking">Breaking</span>
+                    </div>
+                    <h3>Phasmophobia recibe su mayor actualización: nuevos fantasmas, nueva ciudad y modo historia</h3>
+                    <p class="meta">8 de Abril, 2026 · 👁️ 22,100 vistas</p>
+                    <p class="excerpt">Kinetic Games lanzó "Vestige", la actualización más grande en la historia de Phasmophobia. Incluye seis tipos de fantasmas completamente nuevos, un mapa urbano de 40 habitaciones, y un modo historia cooperativo de 8 horas ambientado en los años 80. La actualización es gratuita para todos los jugadores.</p>
+                    <a href="#" class="read-more">Leer más →</a>
+                </div>
+            </article>
+
+            <!-- Noticia 4 -->
+            <article class="article-card" data-cat="rumor">
+                <div class="article-thumbnail">🔍</div>
+                <div class="article-body">
+                    <div class="news-meta-bar">
+                        <span class="news-tag tag-rumor">Rumor</span>
+                    </div>
+                    <h3>¿Silent Hill 3 Remake ya está en desarrollo? Bloober Team publica misteriosas ofertas de empleo</h3>
+                    <p class="meta">7 de Abril, 2026 · 👁️ 31,450 vistas</p>
+                    <p class="excerpt">Bloober Team, responsable del exitoso Silent Hill 2 Remake, ha publicado varias ofertas de trabajo que hacen referencia a "un proyecto de terror psicológico basado en una IP consolidada" y "atmósferas de principios de los 2000". La comunidad no tardó en señalar las similitudes con Heather Mason y la protagonista de SH3.</p>
+                    <a href="#" class="read-more">Leer más →</a>
+                </div>
+            </article>
+
+            <!-- Noticia 5 -->
+            <article class="article-card" data-cat="indie">
+                <div class="article-thumbnail">🕯️</div>
+                <div class="article-body">
+                    <div class="news-meta-bar">
+                        <span class="news-tag tag-indie">Indie</span>
+                    </div>
+                    <h3>Doors of Insanity: el indie de terror cósmico que arrasa en Steam con 95% de valoraciones positivas</h3>
+                    <p class="meta">5 de Abril, 2026 · 👁️ 7,650 vistas</p>
+                    <p class="excerpt">Desarrollado por un equipo de dos personas en tres años, este juego de exploración y terror inspirado en Lovecraft ha conquistado Steam. Sin combate, sin inventario: solo una mansión que se reconfigura sola, diálogos que adaptan el tono según tus decisiones y una criatura que "aprende de cómo juegas".</p>
+                    <a href="#" class="read-more">Leer más →</a>
+                </div>
+            </article>
+
+            <!-- Noticia 6 -->
+            <article class="article-card" data-cat="anuncio">
+                <div class="article-thumbnail">🔪</div>
+                <div class="article-body">
+                    <div class="news-meta-bar">
+                        <span class="news-tag tag-anuncio">Anuncio</span>
+                    </div>
+                    <h3>Dead Space 2 Remake confirmado por EA Motive: "el original sigue siendo perfecto, pero hay margen"</h3>
+                    <p class="meta">3 de Abril, 2026 · 👁️ 19,320 vistas</p>
+                    <p class="excerpt">Tras el éxito del remake del primer Dead Space, EA Motive ha confirmado oficialmente que está trabajando en la segunda entrega. El director creativo declaró que respetarán la visión original del título de 2008 pero añadirán "capas narrativas que dan más contexto a Isaac y a la Unitología". Sin fecha por ahora.</p>
+                    <a href="#" class="read-more">Leer más →</a>
+                </div>
+            </article>
+
+            <!-- Noticia 7 -->
+            <article class="article-card" data-cat="update">
+                <div class="article-thumbnail">🏚️</div>
+                <div class="article-body">
+                    <div class="news-meta-bar">
+                        <span class="news-tag tag-update">Actualización</span>
+                    </div>
+                    <h3>Outlast Trials añade el modo "Persecución": hasta 8 jugadores, uno de ellos encarna al asesino</h3>
+                    <p class="meta">1 de Abril, 2026 · 👁️ 11,880 vistas</p>
+                    <p class="excerpt">Red Barrels ha lanzado la actualización más solicitada por la comunidad. En el nuevo modo asimétrico, uno de los jugadores toma el control de uno de los antagonistas del juego, con habilidades únicas y una IA adaptativa que aprende los patrones de los supervivientes. Disponible gratis en la actualización 2.1.</p>
+                    <a href="#" class="read-more">Leer más →</a>
+                </div>
+            </article>
+
+            <!-- Noticia 8 -->
+            <article class="article-card" data-cat="breaking">
+                <div class="article-thumbnail">🌊</div>
+                <div class="article-body">
+                    <div class="news-meta-bar">
+                        <span class="news-tag tag-breaking">Breaking</span>
+                    </div>
+                    <h3>The Chinese Room anuncia nuevo juego de terror marino para 2027: "más oscuro que Still Wakes the Deep"</h3>
+                    <p class="meta">29 de Marzo, 2026 · 👁️ 8,430 vistas</p>
+                    <p class="excerpt">El estudio detrás de Amnesia: A Machine for Pigs y Still Wakes the Deep ha revelado que su próximo proyecto será otro juego de terror ambiental. Ambientado en las profundidades del océano Pacífico, el juego sin título explorará "el horror de lo que no podemos ver ni entender". Las primeras imágenes muestran abismos bioluminiscentes.</p>
+                    <a href="#" class="read-more">Leer más →</a>
+                </div>
+            </article>
+
+            <!-- Noticia 9 -->
+            <article class="article-card" data-cat="indie">
+                <div class="article-thumbnail">🕷️</div>
+                <div class="article-body">
+                    <div class="news-meta-bar">
+                        <span class="news-tag tag-indie">Indie</span>
+                    </div>
+                    <h3>Lethal Company: la actualización "Abyss" añade planetas submarinos y nuevas criaturas abisales</h3>
+                    <p class="meta">27 de Marzo, 2026 · 👁️ 24,560 vistas</p>
+                    <p class="excerpt">Zeekerss sigue desarrollando en solitario uno de los fenómenos indie más grandes de los últimos años. La actualización "Abyss" introduce tres planetas acuáticos accesibles con un nuevo módulo submarino, criaturas que usan el sonido para detectarte, y un sistema de corrientes que puede arrastrarte en las peores situaciones.</p>
+                    <a href="#" class="read-more">Leer más →</a>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Terror Digital - Blog de Videojuegos de Horror</p>
+        <p>El miedo es solo el principio...</p>
+    </footer>
+</div>
+
+<script src="../js/script.js"></script>
+<script src="../js/header.js"></script>
+<script src="../js/articles_db.js"></script>
+<script>
+    // Intentar cargar desde la API; si falla, se muestra el contenido estático
+    document.addEventListener('DOMContentLoaded', () => {
+        loadArticlesList('noticias', 9, 'articles-container');
+    });
+
+    function filterNews(cat, btn) {
+        document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('#articles-container .article-card').forEach(card => {
+            if (cat === 'all' || card.dataset.cat === cat) {
+                card.style.display = '';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+</script>
+</body>
+</html>

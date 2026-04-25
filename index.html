@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TERROR DIGITAL - Blog de Videojuegos de Horror</title>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Nosifer&family=Crimson+Text:wght@400;600;700&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="grain"></div>
+    
+    <div class="container">
+        <header>
+            <h1 class="logo glitch"><a href="index.html">TERROR DIGITAL</a></h1>
+            <p class="tagline">El Horror Nunca Duerme</p>
+            <nav>
+                <a href="pages/noticias.html">Noticias</a>
+                <a href="pages/reviews.html">Reviews</a>
+                <a href="pages/guias.html">Guías</a>
+                <a href="pages/discusiones.html">Discusiones</a>
+                <a href="pages/comunidad.html">Comunidad</a>
+            </nav>
+        </header>
+
+        <!-- ARTÍCULO DESTACADO: se carga dinámicamente; si falla, se muestra este estático -->
+        <section class="featured">
+            <article class="featured-article" id="featured-main">
+                <div class="featured-image">
+                    <!-- Si hay imagen real: <img src="uploads/NOMBRE.jpg" alt=""> -->
+                    <!-- Si no hay imagen se muestra el emoji de placeholder -->
+                    <span class="thumb-emoji">👻</span>
+                </div>
+                <div class="featured-content" id="featured-content">
+                    <span class="category-tag">Destacado</span>
+                    <h2>Silent Hill 2 Remake: El Terror Psicológico Renace</h2>
+                    <p class="meta">Por Admin Terror | 10 de Febrero, 2026 | 234 comentarios</p>
+                    <p class="excerpt">
+                        Bloober Team ha logrado lo imposible: recrear la atmósfera opresiva y perturbadora del clásico de Konami. 
+                        Exploramos cada rincón de la niebla para traerte el análisis más completo del remake más esperado del año.
+                    </p>
+                    <a href="pages/articulo.html?id=silent-hill-2" class="read-more">Leer análisis completo →</a>
+                </div>
+            </article>
+
+            <div class="sidebar-news">
+                <article class="news-item">
+                    <span class="category-tag">Breaking News</span>
+                    <h3>Anunciado nuevo DLC para Resident Evil Village</h3>
+                    <p class="meta">Hace 2 horas</p>
+                    <p class="excerpt">Capcom sorprende con contenido adicional protagonizado por Lady Dimitrescu...</p>
+                    <a href="pages/articulo.html?id=re-village-dlc" class="read-more-small">Leer más →</a>
+                </article>
+                <article class="news-item">
+                    <span class="category-tag">Actualización</span>
+                    <h3>Phasmophobia recibe modo pesadilla</h3>
+                    <p class="meta">Hace 5 horas</p>
+                    <p class="excerpt">El popular juego de fantasmas aumenta la dificultad con nuevos desafíos...</p>
+                    <a href="pages/articulo.html?id=phasmophobia-update" class="read-more-small">Leer más →</a>
+                </article>
+                <article class="news-item">
+                    <span class="category-tag">Indie</span>
+                    <h3>Descubre: The Mortuary Assistant</h3>
+                    <p class="meta">Hace 1 día</p>
+                    <p class="excerpt">Este simulador de embalsamamiento esconde secretos terroríficos...</p>
+                    <a href="pages/articulo.html?id=mortuary-assistant" class="read-more-small">Leer más →</a>
+                </article>
+            </div>
+        </section>
+
+        <section class="latest-section" id="noticias">
+            <h2 class="section-title">Últimas Noticias del Inframundo</h2>
+            <div class="articles-grid" id="articles-container">
+                <!-- Las tarjetas se reemplazan dinámicamente; estas son el fallback estático -->
+                <article class="article-card">
+                    <div class="article-thumbnail"><span class="thumb-emoji">🎮</span></div>
+                    <div class="article-body">
+                        <span class="category-tag">Preview</span>
+                        <h3>Alan Wake 3: Primeras Impresiones</h3>
+                        <p class="meta">8 de Febrero, 2026</p>
+                        <p class="excerpt">Remedy Entertainment nos adelanta lo que viene en la tercera entrega de la saga.</p>
+                        <a href="pages/articulo.html?id=alan-wake-3" class="read-more">Leer más →</a>
+                    </div>
+                </article>
+                <article class="article-card">
+                    <div class="article-thumbnail"><span class="thumb-emoji">🔪</span></div>
+                    <div class="article-body">
+                        <span class="category-tag">Review</span>
+                        <h3>Still Wakes the Deep: Terror en Alta Mar</h3>
+                        <p class="meta">6 de Febrero, 2026</p>
+                        <p class="excerpt">Una plataforma petrolera en los 70s se convierte en tu peor pesadilla.</p>
+                        <a href="pages/articulo.html?id=still-wakes" class="read-more">Leer más →</a>
+                    </div>
+                </article>
+                <article class="article-card">
+                    <div class="article-thumbnail"><span class="thumb-emoji">🧟</span></div>
+                    <div class="article-body">
+                        <span class="category-tag">Guía</span>
+                        <h3>Dead Space Remake: Guía de Supervivencia</h3>
+                        <p class="meta">5 de Febrero, 2026</p>
+                        <p class="excerpt">Consejos esenciales para sobrevivir a bordo del USG Ishimura.</p>
+                        <a href="pages/articulo.html?id=dead-space-guide" class="read-more">Leer más →</a>
+                    </div>
+                </article>
+                <article class="article-card">
+                    <div class="article-thumbnail"><span class="thumb-emoji">👁️</span></div>
+                    <div class="article-body">
+                        <span class="category-tag">Análisis</span>
+                        <h3>Los 10 Mejores Juegos de Terror de 2025</h3>
+                        <p class="meta">3 de Febrero, 2026</p>
+                        <p class="excerpt">Repasamos los títulos que nos quitaron el sueño el año pasado.</p>
+                        <a href="pages/articulo.html?id=top-10-2025" class="read-more">Leer más →</a>
+                    </div>
+                </article>
+                <article class="article-card">
+                    <div class="article-thumbnail"><span class="thumb-emoji">🏚️</span></div>
+                    <div class="article-body">
+                        <span class="category-tag">Especial</span>
+                        <h3>Outlast Trials: Cooperativo Aterrador</h3>
+                        <p class="meta">1 de Febrero, 2026</p>
+                        <p class="excerpt">El terror multiplayer alcanza nuevas cotas.</p>
+                        <a href="pages/articulo.html?id=outlast-trials" class="read-more">Leer más →</a>
+                    </div>
+                </article>
+                <article class="article-card">
+                    <div class="article-thumbnail"><span class="thumb-emoji">🕷️</span></div>
+                    <div class="article-body">
+                        <span class="category-tag">Indie</span>
+                        <h3>Lethal Company: El Fenómeno Indie</h3>
+                        <p class="meta">30 de Enero, 2026</p>
+                        <p class="excerpt">¿Por qué este juego se ha vuelto viral? Analizamos el éxito que conquista Steam.</p>
+                        <a href="pages/articulo.html?id=lethal-company" class="read-more">Leer más →</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Terror Digital - Blog de Videojuegos de Horror</p>
+            <p>El miedo es solo el principio...</p>
+        </footer>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/articles_db.js"></script>
+</body>
+</html>

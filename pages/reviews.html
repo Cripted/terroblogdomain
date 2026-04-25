@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews - TERROR DIGITAL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Nosifer&family=Crimson+Text:wght@400;600;700&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .review-card {
+            border: 1px solid var(--fog-gray);
+            background: rgba(10,10,10,.6);
+            transition: all .3s ease;
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+        .review-card:hover { border-color: var(--blood-red); background: rgba(139,0,0,.07); transform: translateX(4px); }
+        .review-score-block {
+            background: linear-gradient(180deg, var(--blood-red), #5a0000);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem .8rem;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .review-score-num {
+            font-family: 'Rubik', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #fff;
+            line-height: 1;
+        }
+        .review-score-label {
+            font-family: 'Rubik', sans-serif;
+            font-size: .62rem;
+            text-transform: uppercase;
+            letter-spacing: .08rem;
+            color: rgba(255,255,255,.7);
+            margin-top: .3rem;
+        }
+        .review-score-stars {
+            font-size: .8rem;
+            margin-top: .4rem;
+            color: #ffd700;
+        }
+        .review-body { padding: 1.5rem; }
+        .review-body h3 { font-size: 1.3rem; color: var(--ghost-white); margin-bottom: .4rem; line-height: 1.3; }
+        .review-body .dev { color: var(--pale-green); font-family: 'Rubik', sans-serif; font-size: .8rem; margin-bottom: .6rem; }
+        .review-body p { color: #bbb; line-height: 1.7; font-size: 1rem; margin-bottom: .8rem; }
+        .review-tags { display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: .8rem; }
+        .rtag { font-family: 'Rubik', sans-serif; font-size: .7rem; padding: .2rem .6rem; border: 1px solid var(--fog-gray); color: #888; }
+        .review-meta-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem; }
+        .review-verdict {
+            font-family: 'Rubik', sans-serif;
+            font-size: .75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .08rem;
+            padding: .25rem .7rem;
+            border: 1px solid;
+        }
+        .verdict-esencial  { color: #0f6; border-color: #0f6; background: rgba(0,255,102,.08); }
+        .verdict-excelente { color: #4af; border-color: #4af; background: rgba(68,170,255,.08); }
+        .verdict-bueno     { color: #fa4; border-color: #fa4; background: rgba(255,170,68,.08); }
+        .verdict-regular   { color: #f88; border-color: #f88; background: rgba(255,136,136,.08); }
+
+        .sort-bar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .sort-bar label { color: #666; font-family: 'Rubik', sans-serif; font-size: .85rem; }
+        .sort-bar select {
+            background: #0a0a0a;
+            border: 1px solid var(--fog-gray);
+            color: var(--ghost-white);
+            font-family: 'Rubik', sans-serif;
+            font-size: .85rem;
+            padding: .4rem .8rem;
+        }
+        @media (max-width: 600px) {
+            .review-card { grid-template-columns: 80px 1fr; }
+            .review-score-num { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="container">
+    <header></header>
+
+    <div class="page-header">
+        <h1 class="section-title">Reviews: Anatomía del Terror</h1>
+        <p class="page-description">Análisis en profundidad de los mejores — y peores — juegos de terror</p>
+    </div>
+
+    <div class="sort-bar">
+        <label>Ordenar por:</label>
+        <select onchange="sortReviews(this.value)">
+            <option value="fecha">Más recientes</option>
+            <option value="score">Mayor puntuación</option>
+            <option value="vistas">Más vistos</option>
+        </select>
+        <span style="color:#444;font-family:'Rubik',sans-serif;font-size:.85rem;">9 reviews disponibles</span>
+    </div>
+
+    <section id="reviews-list">
+
+        <!-- Review 1 -->
+        <article class="review-card" data-score="9.5" data-fecha="20260410" data-vistas="34200">
+            <div class="review-score-block">
+                <div class="review-score-num">9.5</div>
+                <div class="review-score-stars">★★★★★</div>
+                <div class="review-score-label">Obra maestra</div>
+            </div>
+            <div class="review-body">
+                <p class="dev">💀 Bloober Team · 2024 · PS5, Xbox, PC</p>
+                <h3>Silent Hill 2 Remake — El terror psicológico renace con una brutalidad sorprendente</h3>
+                <div class="review-tags">
+                    <span class="rtag">Terror psicológico</span>
+                    <span class="rtag">Tercera persona</span>
+                    <span class="rtag">Historia</span>
+                    <span class="rtag">Single player</span>
+                </div>
+                <p>Bloober Team hizo lo imposible. El estudio que dividía opiniones entregó una de las mejores remakes de la historia, capturando la niebla opresiva de Silent Hill con una fidelidad artística que convierte cada fotograma en cuadro. El combate mejorado no distrae del corazón del juego: la culpa aplastante de James Sunderland, representada en criaturas que ahora duelen de verdad.</p>
+                <div class="review-meta-row">
+                    <span class="meta" style="font-family:'Rubik',sans-serif;font-size:.8rem;">📅 10 de Abril, 2026 · 👁️ 34,200 vistas</span>
+                    <span class="review-verdict verdict-esencial">⚡ Esencial</span>
+                    <a href="#" class="read-more" style="font-size:.85rem;">Leer análisis completo →</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Review 2 -->
+        <article class="review-card" data-score="9.5" data-fecha="20260402" data-vistas="28900">
+            <div class="review-score-block">
+                <div class="review-score-num">9.5</div>
+                <div class="review-score-stars">★★★★★</div>
+                <div class="review-score-label">Obra maestra</div>
+            </div>
+            <div class="review-body">
+                <p class="dev">🔦 Remedy Entertainment · 2023 · PS5, Xbox, PC</p>
+                <h3>Alan Wake 2 — El terror que difumina realidad y ficción hasta hacerte dudar de todo</h3>
+                <div class="review-tags">
+                    <span class="rtag">Terror narrativo</span>
+                    <span class="rtag">Metaficción</span>
+                    <span class="rtag">Tercera persona</span>
+                    <span class="rtag">Multimedia</span>
+                </div>
+                <p>Remedy Entertainment entregó su obra cumbre. Alan Wake 2 no es solo un videojuego de terror: es una experiencia multimedia que mezcla live action, secuencias de televisión y mecánicas de escritura creativa. La detective Saga Anderson y el escritor Alan Wake comparten una narrativa en espejo que desafía las convenciones del medio. Perturbador, brillante e irrepetible.</p>
+                <div class="review-meta-row">
+                    <span class="meta" style="font-family:'Rubik',sans-serif;font-size:.8rem;">📅 2 de Abril, 2026 · 👁️ 28,900 vistas</span>
+                    <span class="review-verdict verdict-esencial">⚡ Esencial</span>
+                    <a href="#" class="read-more" style="font-size:.85rem;">Leer análisis completo →</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Review 3 -->
+        <article class="review-card" data-score="9.0" data-fecha="20260325" data-vistas="19400">
+            <div class="review-score-block">
+                <div class="review-score-num">9.0</div>
+                <div class="review-score-stars">★★★★★</div>
+                <div class="review-score-label">Excelente</div>
+            </div>
+            <div class="review-body">
+                <p class="dev">🩸 EA Motive · 2023 · PS5, Xbox, PC</p>
+                <h3>Dead Space Remake — La pesadilla del USG Ishimura regresa más brutal que nunca</h3>
+                <div class="review-tags">
+                    <span class="rtag">Survival horror</span>
+                    <span class="rtag">Ciencia ficción</span>
+                    <span class="rtag">Desmembramiento</span>
+                    <span class="rtag">Atmosférico</span>
+                </div>
+                <p>EA Motive demostró que se puede honrar un clásico sin traicionar su esencia. El remake de Dead Space mantiene el diseño de niveles original pero añade una narrativa más desarrollada para Isaac Clarke —ahora con voz propia y con una relación más profunda con Nicole—, más enemigos, zonas secretas y una dirección de arte que convierte el Ishimura en el barco más terrorífico de la ciencia ficción.</p>
+                <div class="review-meta-row">
+                    <span class="meta" style="font-family:'Rubik',sans-serif;font-size:.8rem;">📅 25 de Marzo, 2026 · 👁️ 19,400 vistas</span>
+                    <span class="review-verdict verdict-excelente">✦ Excelente</span>
+                    <a href="#" class="read-more" style="font-size:.85rem;">Leer análisis completo →</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Review 4 -->
+        <article class="review-card" data-score="9.0" data-fecha="20260318" data-vistas="15100">
+            <div class="review-score-block">
+                <div class="review-score-num">9.0</div>
+                <div class="review-score-stars">★★★★★</div>
+                <div class="review-score-label">Excelente</div>
+            </div>
+            <div class="review-body">
+                <p class="dev">🎯 Capcom · 2023 · PS4, PS5, Xbox, PC</p>
+                <h3>Resident Evil 4 Remake — Acción y terror en perfecta armonía treinta años después</h3>
+                <div class="review-tags">
+                    <span class="rtag">Action-horror</span>
+                    <span class="rtag">Tercera persona</span>
+                    <span class="rtag">Remake</span>
+                    <span class="rtag">Replay value</span>
+                </div>
+                <p>Capcom volvió a hacerlo. Si el RE2 y RE3 Remake demostraron que podían modernizar sus clásicos, el RE4 Remake eleva el listón. Leon Kennedy nunca fue tan agil ni tan humano. El sistema de parada de la navaja, los Mercenaries renovados, Ashley con más agencia y una Lord Saddler más amenazante que nunca. Una masterclass de diseño de videojuegos.</p>
+                <div class="review-meta-row">
+                    <span class="meta" style="font-family:'Rubik',sans-serif;font-size:.8rem;">📅 18 de Marzo, 2026 · 👁️ 15,100 vistas</span>
+                    <span class="review-verdict verdict-excelente">✦ Excelente</span>
+                    <a href="#" class="read-more" style="font-size:.85rem;">Leer análisis completo →</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Review 5 -->
+        <article class="review-card" data-score="8.5" data-fecha="20260310" data-vistas="11800">
+            <div class="review-score-block">
+                <div class="review-score-num">8.5</div>
+                <div class="review-score-stars">★★★★½</div>
+                <div class="review-score-label">Muy bueno</div>
+            </div>
+            <div class="review-body">
+                <p class="dev">🌊 The Chinese Room · 2024 · PS5, Xbox, PC</p>
+                <h3>Still Wakes the Deep — Terror atmosférico sin piedad en las profundidades del Mar del Norte</h3>
+                <div class="review-tags">
+                    <span class="rtag">Terror sin combate</span>
+                    <span class="rtag">Caminata</span>
+                    <span class="rtag">Atmosférico</span>
+                    <span class="rtag">Narrativo</span>
+                </div>
+                <p>Una plataforma petrolera escocesa en 1975, una tormenta interminable y algo que acaba de salir del fondo del océano. The Chinese Room construyó el juego de terror atmosférico más sólido de los últimos años. Sin armas, sin escondites: solo Caz y su desesperación por sobrevivir. El acento glaswegiano del protagonista y los diálogos auténticos convierten la tragedia en algo devastadoramente real.</p>
+                <div class="review-meta-row">
+                    <span class="meta" style="font-family:'Rubik',sans-serif;font-size:.8rem;">📅 10 de Marzo, 2026 · 👁️ 11,800 vistas</span>
+                    <span class="review-verdict verdict-excelente">✦ Muy bueno</span>
+                    <a href="#" class="read-more" style="font-size:.85rem;">Leer análisis completo →</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Review 6 -->
+        <article class="review-card" data-score="8.5" data-fecha="20260301" data-vistas="9200">
+            <div class="review-score-block">
+                <div class="review-score-num">8.5</div>
+                <div class="review-score-stars">★★★★½</div>
+                <div class="review-score-label">Muy bueno</div>
+            </div>
+            <div class="review-body">
+                <p class="dev">🏗️ Frictional Games · 2023 · PC</p>
+                <h3>Amnesia: The Bunker — El horror que se adapta y aprende de ti en cada partida</h3>
+                <div class="review-tags">
+                    <span class="rtag">Supervivencia</span>
+                    <span class="rtag">Procedural</span>
+                    <span class="rtag">Primera persona</span>
+                    <span class="rtag">Recursos escasos</span>
+                </div>
+                <p>Frictional rompe su propio molde. The Bunker abandona los pasillos fijos de los Amnesia anteriores para proponer un búnker de la Primera Guerra Mundial donde la bestia que te persigue muta su comportamiento en función de tus acciones. Cada partida es diferente. Cada ruido tiene consecuencias. La gestión de una linterna de cuerda puede ser la diferencia entre vivir y morir.</p>
+                <div class="review-meta-row">
+                    <span class="meta" style="font-family:'Rubik',sans-serif;font-size:.8rem;">📅 1 de Marzo, 2026 · 👁️ 9,200 vistas</span>
+                    <span class="review-verdict verdict-excelente">✦ Muy bueno</span>
+                    <a href="#" class="read-more" style="font-size:.85rem;">Leer análisis completo →</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Review 7 -->
+        <article class="review-card" data-score="8.0" data-fecha="20260220" data-vistas="17600">
+            <div class="review-score-block">
+                <div class="review-score-num">8.0</div>
+                <div class="review-score-stars">★★★★☆</div>
+                <div class="review-score-label">Bueno</div>
+            </div>
+            <div class="review-body">
+                <p class="dev">👷 Red Barrels · 2024 · PS5, Xbox, PC</p>
+                <h3>Outlast Trials — El terror cooperativo que supera al original en intensidad pero pierde alma</h3>
+                <div class="review-tags">
+                    <span class="rtag">Cooperativo</span>
+                    <span class="rtag">Multijugador</span>
+                    <span class="rtag">Sigilo</span>
+                    <span class="rtag">Survival</span>
+                </div>
+                <p>Outlast Trials lleva el terror a 4 jugadores con resultados brillantes en la tensión pero irregulares en la narrativa. El programa MKUltra sirve de excusa para poner a los jugadores en escenarios brutales donde la comunicación y la coordinación son clave. El problema: los monstruos pierden algo de su poder de intimidación cuando juegas rodeado de amigos. Aun así, la mejor experiencia de terror cooperativo disponible.</p>
+                <div class="review-meta-row">
+                    <span class="meta" style="font-family:'Rubik',sans-serif;font-size:.8rem;">📅 20 de Febrero, 2026 · 👁️ 17,600 vistas</span>
+                    <span class="review-verdict verdict-bueno">● Bueno</span>
+                    <a href="#" class="read-more" style="font-size:.85rem;">Leer análisis completo →</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Review 8 -->
+        <article class="review-card" data-score="8.0" data-fecha="20260210" data-vistas="25300">
+            <div class="review-score-block">
+                <div class="review-score-num">8.0</div>
+                <div class="review-score-stars">★★★★☆</div>
+                <div class="review-score-label">Bueno</div>
+            </div>
+            <div class="review-body">
+                <p class="dev">🔭 Kinetic Games · 2020-presente · PC, VR</p>
+                <h3>Phasmophobia — El cazafantasmas que definió un género y sigue creciendo cuatro años después</h3>
+                <div class="review-tags">
+                    <span class="rtag">Investigación</span>
+                    <span class="rtag">Cooperativo</span>
+                    <span class="rtag">Compatible VR</span>
+                    <span class="rtag">Early Access</span>
+                </div>
+                <p>Que un juego de Early Access creado por una sola persona se convierta en fenómeno de masas con millones de jugadores dice mucho de la solidez de su propuesta. Entrar en una casa con termómetro, EMF y tablero espíritu en mano, buscar evidencias e intentar identificar qué fantasma acecha sigue siendo una de las experiencias más originales del género. Las actualizaciones constantes lo mantienen fresco y perturbador.</p>
+                <div class="review-meta-row">
+                    <span class="meta" style="font-family:'Rubik',sans-serif;font-size:.8rem;">📅 10 de Febrero, 2026 · 👁️ 25,300 vistas</span>
+                    <span class="review-verdict verdict-bueno">● Bueno</span>
+                    <a href="#" class="read-more" style="font-size:.85rem;">Leer análisis completo →</a>
+                </div>
+            </div>
+        </article>
+
+        <!-- Review 9 -->
+        <article class="review-card" data-score="7.5" data-fecha="20260201" data-vistas="8100">
+            <div class="review-score-block">
+                <div class="review-score-num">7.5</div>
+                <div class="review-score-stars">★★★★☆</div>
+                <div class="review-score-label">Notable</div>
+            </div>
+            <div class="review-body">
+                <p class="dev">👁️ Zeekerss · 2023-presente · PC</p>
+                <h3>Lethal Company — El indie viral que redefine el terror cooperativo con humor y horror genuino</h3>
+                <div class="review-tags">
+                    <span class="rtag">Indie</span>
+                    <span class="rtag">Cooperativo</span>
+                    <span class="rtag">Procedural</span>
+                    <span class="rtag">Humor negro</span>
+                </div>
+                <p>Desarrollado por una persona en Unity, Lethal Company es un accidente feliz del gaming independiente. Recolectar chatarra en lunas abandonadas mientras criaturas con diseños imposibles te acechan no debería funcionar, pero lo hace con una eficacia brutal. La mezcla de humor negro, comunicación de voz y muertes absurdas lo convierte en uno de los mejores juegos para vivir con amigos aunque técnicamente sea sencillo.</p>
+                <div class="review-meta-row">
+                    <span class="meta" style="font-family:'Rubik',sans-serif;font-size:.8rem;">📅 1 de Febrero, 2026 · 👁️ 8,100 vistas</span>
+                    <span class="review-verdict verdict-bueno">● Notable</span>
+                    <a href="#" class="read-more" style="font-size:.85rem;">Leer análisis completo →</a>
+                </div>
+            </div>
+        </article>
+
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Terror Digital - Blog de Videojuegos de Horror</p>
+        <p>El miedo es solo el principio...</p>
+    </footer>
+</div>
+
+<script src="../js/script.js"></script>
+<script src="../js/header.js"></script>
+<script src="../js/articles_db.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        loadArticlesList('review', 9, 'articles-container');
+    });
+
+    function sortReviews(by) {
+        const list = document.getElementById('reviews-list');
+        const cards = Array.from(list.querySelectorAll('.review-card'));
+        cards.sort((a, b) => {
+            if (by === 'score')  return parseFloat(b.dataset.score)  - parseFloat(a.dataset.score);
+            if (by === 'fecha')  return parseInt(b.dataset.fecha)    - parseInt(a.dataset.fecha);
+            if (by === 'vistas') return parseInt(b.dataset.vistas)   - parseInt(a.dataset.vistas);
+            return 0;
+        });
+        cards.forEach(c => list.appendChild(c));
+    }
+</script>
+</body>
+</html>

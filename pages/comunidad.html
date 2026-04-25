@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunidad - TERROR DIGITAL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Nosifer&family=Crimson+Text:wght@400;600;700&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+<div class="grain"></div>
+<div class="container">
+    <header></header>
+    <div class="page-header">
+        <h1 class="section-title">Nuestra Comunidad</h1>
+        <p class="page-description">Unidos por el amor al terror gaming</p>
+    </div>
+    <section>
+        <div class="community-grid">
+            <div class="community-card"><div class="community-icon">👥</div><h3>Únete a Discord</h3><p>Chatea en tiempo real con otros fans del terror y organiza partidas cooperativas.</p><a href="#" class="read-more">Unirse →</a></div>
+            <div class="community-card"><div class="community-icon">🎮</div><h3>Eventos de la Comunidad</h3><p>Participa en speedruns, desafíos y torneos mensuales con premios.</p><a href="#" class="read-more">Ver eventos →</a></div>
+            <div class="community-card"><div class="community-icon">✍️</div><h3>Contribuye al Blog</h3><p>Envía tus artículos, guías y reviews al equipo editorial.</p><a href="#" class="read-more">Enviar artículo →</a></div>
+        </div>
+    </section>
+    <section style="margin-bottom:4rem;">
+        <h2 class="section-title">Top Contribuidores del Mes</h2>
+        <div class="contributors-list" id="contributors-list">
+            <div class="contributor"><div class="contributor-rank">🏆</div><div class="contributor-info"><strong>HorrorMaster88</strong><p>45 publicaciones | 156 likes totales</p></div></div>
+            <div class="contributor"><div class="contributor-rank">🥈</div><div class="contributor-info"><strong>SilentFan_2026</strong><p>38 publicaciones | 132 likes totales</p></div></div>
+            <div class="contributor"><div class="contributor-rank">🥉</div><div class="contributor-info"><strong>PyramidHead_Forever</strong><p>29 publicaciones | 118 likes totales</p></div></div>
+            <div class="contributor"><div class="contributor-rank">4</div><div class="contributor-info"><strong>REVillageExplorer</strong><p>22 publicaciones | 95 likes totales</p></div></div>
+            <div class="contributor"><div class="contributor-rank">5</div><div class="contributor-info"><strong>GhostHunter_Pro</strong><p>19 publicaciones | 87 likes totales</p></div></div>
+        </div>
+    </section>
+    <section class="community-stats" style="margin-bottom:4rem;">
+        <h2 class="section-title">Estadísticas de la Comunidad</h2>
+        <div class="stats-grid">
+            <div class="stat-card"><div class="stat-number" id="stat-miembros">15,847</div><div class="stat-label">Miembros Activos</div></div>
+            <div class="stat-card"><div class="stat-number" id="stat-articulos">1,234</div><div class="stat-label">Artículos Publicados</div></div>
+            <div class="stat-card"><div class="stat-number" id="stat-discusiones">8,956</div><div class="stat-label">Discusiones Activas</div></div>
+            <div class="stat-card"><div class="stat-number" id="stat-comentarios">42,387</div><div class="stat-label">Comentarios Totales</div></div>
+        </div>
+    </section>
+    <footer><p>&copy; 2026 Terror Digital</p><p>El miedo es solo el principio...</p></footer>
+</div>
+<script src="../js/header.js"></script>
+<script src="../js/script.js"></script>
+<script>
+async function loadComunidad() {
+    try {
+        const stats = await fetch('../php/api_general.php?action=estadisticas').then(r => r.json());
+        if (!stats.error) {
+            document.getElementById('stat-miembros').textContent     = Number(stats.miembros_activos).toLocaleString();
+            document.getElementById('stat-articulos').textContent    = Number(stats.articulos_publicados).toLocaleString();
+            document.getElementById('stat-discusiones').textContent  = Number(stats.discusiones_activas).toLocaleString();
+            document.getElementById('stat-comentarios').textContent  = Number(stats.comentarios_totales).toLocaleString();
+        }
+        const contribs = await fetch('../php/api_general.php?action=top_contribuidores').then(r => r.json());
+        if (!contribs.error && contribs.length) {
+            const ranks = ['🏆','🥈','🥉','4','5'];
+            document.getElementById('contributors-list').innerHTML = contribs.map((c,i) => `
+                <div class="contributor">
+                    <div class="contributor-rank">${ranks[i]||i+1}</div>
+                    <div class="contributor-info"><strong>${c.nombre}</strong><p>${c.total_discusiones} publicaciones | ${c.total_likes} likes totales</p></div>
+                </div>`).join('');
+        }
+    } catch(e) { console.error('Error comunidad:', e); }
+}
+document.addEventListener('DOMContentLoaded', loadComunidad);
+</script>
+<script src="../js/header.js"></script>
+</body>
+</html>

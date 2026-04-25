@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guías - TERROR DIGITAL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Nosifer&family=Crimson+Text:wght@400;600;700&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .guide-hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        .guide-featured {
+            grid-column: 1 / 3;
+            background: linear-gradient(135deg, rgba(139,0,0,.25), rgba(10,10,10,.9));
+            border: 1px solid var(--blood-red);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .guide-featured::before {
+            content: '📖';
+            position: absolute;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 5rem;
+            opacity: .12;
+        }
+        .guide-featured h2 { font-size: 1.6rem; color: var(--ghost-white); margin-bottom: .8rem; line-height: 1.3; }
+        .guide-featured p  { color: #bbb; line-height: 1.7; margin-bottom: 1rem; }
+        .guide-small {
+            background: rgba(10,10,10,.7);
+            border: 1px solid var(--fog-gray);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: border-color .2s;
+        }
+        .guide-small:hover { border-color: var(--blood-red); }
+        .guide-small h3 { font-size: 1.1rem; color: var(--ghost-white); margin-bottom: .6rem; line-height: 1.4; }
+        .guide-small p  { color: #888; font-size: .9rem; line-height: 1.5; margin-bottom: 1rem; flex-grow: 1; }
+
+        .guide-type-tag {
+            display: inline-block;
+            font-family: 'Rubik', sans-serif;
+            font-size: .68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .1rem;
+            padding: .25rem .7rem;
+            border: 1px solid;
+            margin-bottom: .8rem;
+        }
+        .type-completa  { color: var(--accent-crimson); border-color: var(--accent-crimson); background: rgba(220,20,60,.08); }
+        .type-trucos    { color: #4af; border-color: #4af; background: rgba(68,170,255,.08); }
+        .type-secretos  { color: #fa4; border-color: #fa4; background: rgba(255,170,68,.08); }
+        .type-fantasmas { color: var(--pale-green); border-color: var(--pale-green); background: rgba(0,255,65,.06); }
+        .type-mapa      { color: #a4f; border-color: #a4f; background: rgba(170,68,255,.08); }
+
+        .guide-grid-full {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        .guide-card {
+            background: rgba(10,10,10,.6);
+            border: 1px solid var(--fog-gray);
+            transition: all .3s ease;
+            overflow: hidden;
+        }
+        .guide-card:hover { border-color: var(--blood-red); transform: translateY(-4px); background: rgba(139,0,0,.07); }
+        .guide-card-header {
+            padding: 1.5rem 1.5rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        .guide-emoji-box {
+            width: 52px;
+            height: 52px;
+            background: rgba(139,0,0,.2);
+            border: 1px solid var(--blood-red);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            flex-shrink: 0;
+        }
+        .guide-card-body { padding: 1rem 1.5rem 1.5rem; }
+        .guide-card-body h3 { font-size: 1.15rem; color: var(--ghost-white); margin-bottom: .5rem; line-height: 1.3; }
+        .guide-card-body p  { color: #999; font-size: .9rem; line-height: 1.6; margin-bottom: 1rem; }
+
+        .guide-info-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: .8rem;
+            flex-wrap: wrap;
+        }
+        .guide-badge {
+            font-family: 'Rubik', sans-serif;
+            font-size: .72rem;
+            padding: .2rem .6rem;
+            border: 1px solid var(--fog-gray);
+            color: #888;
+        }
+        .guide-badge.dif-easy   { color: #0c6; border-color: #0c6; background: rgba(0,200,80,.07); }
+        .guide-badge.dif-medium { color: #fa4; border-color: #fa4; background: rgba(255,170,68,.07); }
+        .guide-badge.dif-hard   { color: var(--accent-crimson); border-color: var(--accent-crimson); background: rgba(220,20,60,.07); }
+
+        .divider-title {
+            font-family: 'Creepster', cursive;
+            font-size: 2rem;
+            color: var(--blood-red);
+            letter-spacing: .15rem;
+            margin: 2.5rem 0 1.5rem;
+            padding-bottom: .8rem;
+            border-bottom: 1px solid var(--fog-gray);
+        }
+
+        @media (max-width: 900px) {
+            .guide-hero-grid { grid-template-columns: 1fr; }
+            .guide-featured { grid-column: 1; }
+        }
+    </style>
+</head>
+<body>
+<div class="grain"></div>
+<div class="container">
+    <header></header>
+
+    <div class="page-header">
+        <h1 class="section-title">Guías de Supervivencia</h1>
+        <p class="page-description">Consejos, mapas, secretos y estrategias para dominar el horror — o al menos intentarlo</p>
+    </div>
+
+    <!-- Guías destacadas -->
+    <div class="guide-hero-grid">
+        <div class="guide-featured">
+            <span class="guide-type-tag type-completa">📋 Guía completa</span>
+            <h2>Silent Hill 2 Remake: Guía definitiva — todos los finales, armas secretas y notas ocultas</h2>
+            <p>La guía más completa del remake. Cubre los 6 finales del juego y las condiciones exactas para desbloquear cada uno, incluyendo el nuevo final añadido por Bloober Team. Además: localización de todas las notas de memos, las mejoras de arma que más importan y el modo NG+ explicado al detalle.</p>
+            <p class="meta" style="color:#555;font-family:'Rubik',sans-serif;font-size:.82rem;">📅 8 de Abril, 2026 · ⏱️ 25 min lectura · 👁️ 41,200 vistas</p>
+            <a href="#" class="read-more">Leer guía completa →</a>
+        </div>
+        <div class="guide-small">
+            <div>
+                <span class="guide-type-tag type-fantasmas">👻 Guía de fantasmas</span>
+                <h3>Phasmophobia: Cómo identificar los 24 tipos de fantasma con evidencias</h3>
+                <p>Tabla actualizada con las evidencias únicas de cada fantasma, sus comportamientos especiales y trucos para identificarlos rápido en dificultad Pesadilla donde hay menos evidencias.</p>
+            </div>
+            <a href="#" class="read-more-small">Ver guía →</a>
+        </div>
+    </div>
+
+    <!-- Guías por juego -->
+    <h2 class="divider-title">🔪 Resident Evil</h2>
+    <div class="guide-grid-full">
+
+        <article class="guide-card">
+            <div class="guide-card-header">
+                <div class="guide-emoji-box">🗺️</div>
+                <div>
+                    <span class="guide-type-tag type-mapa">Mapa de tesoros</span>
+                    <div class="guide-info-row">
+                        <span class="guide-badge dif-medium">Dificultad: Media</span>
+                        <span class="guide-badge">⏱️ 15 min</span>
+                    </div>
+                </div>
+            </div>
+            <div class="guide-card-body">
+                <h3>RE Village: Todos los tesoros, gemas y dónde venderlos</h3>
+                <p>Mapa completo con la localización de los 12 tesoros principales, las 9 gemas para engarces, y la estrategia óptima para maximizar pesetas y comprar las mejores armas antes del castillo de Heisenberg.</p>
+                <a href="#" class="read-more-small">Leer guía →</a>
+            </div>
+        </article>
+
+        <article class="guide-card">
+            <div class="guide-card-header">
+                <div class="guide-emoji-box">🔫</div>
+                <div>
+                    <span class="guide-type-tag type-trucos">Armas y mejoras</span>
+                    <div class="guide-info-row">
+                        <span class="guide-badge dif-easy">Dificultad: Fácil</span>
+                        <span class="guide-badge">⏱️ 10 min</span>
+                    </div>
+                </div>
+            </div>
+            <div class="guide-card-body">
+                <h3>RE4 Remake: Qué armas mejorar primero y cuáles ignorar</h3>
+                <p>El Red9 sigue siendo el rey de las pistolas, pero la escopeta de recarga alternada destroza enemigos de primera. Esta guía prioriza inversiones según el capítulo en que te encuentres, para que nunca te quedes sin pesetas en el peor momento.</p>
+                <a href="#" class="read-more-small">Leer guía →</a>
+            </div>
+        </article>
+
+        <article class="guide-card">
+            <div class="guide-card-header">
+                <div class="guide-emoji-box">🏆</div>
+                <div>
+                    <span class="guide-type-tag type-secretos">Secretos</span>
+                    <div class="guide-info-row">
+                        <span class="guide-badge dif-hard">Dificultad: Alta</span>
+                        <span class="guide-badge">⏱️ 20 min</span>
+                    </div>
+                </div>
+            </div>
+            <div class="guide-card-body">
+                <h3>RE Village: Cómo desbloquear el modo Chris y el infinite ammo</h3>
+                <p>Guía paso a paso para desbloquear todos los extras del juego: el Modo de Chris Redfield, el Chris Overtime, las armas con munición infinita y la dificultad Village of Shadows, la más brutal del juego.</p>
+                <a href="#" class="read-more-small">Leer guía →</a>
+            </div>
+        </article>
+
+    </div>
+
+    <h2 class="divider-title">💀 Silent Hill</h2>
+    <div class="guide-grid-full">
+
+        <article class="guide-card">
+            <div class="guide-card-header">
+                <div class="guide-emoji-box">🎭</div>
+                <div>
+                    <span class="guide-type-tag type-completa">Guía de finales</span>
+                    <div class="guide-info-row">
+                        <span class="guide-badge dif-medium">Dificultad: Media</span>
+                        <span class="guide-badge">⏱️ 18 min</span>
+                    </div>
+                </div>
+            </div>
+            <div class="guide-card-body">
+                <h3>SH2 Remake: Los 6 finales explicados y cómo conseguirlos</h3>
+                <p>El remake añade un nuevo final respecto al original de 2001. Esta guía detalla los factores que el juego rastrea en secreto —cuánto daño recibes, cuánto tiempo miras el inventario, cuántos botiquines usas— y cómo manipularlos para ver el final que quieres.</p>
+                <a href="#" class="read-more-small">Leer guía →</a>
+            </div>
+        </article>
+
+        <article class="guide-card">
+            <div class="guide-card-header">
+                <div class="guide-emoji-box">🔍</div>
+                <div>
+                    <span class="guide-type-tag type-secretos">Secretos</span>
+                    <div class="guide-info-row">
+                        <span class="guide-badge dif-hard">Dificultad: Alta</span>
+                        <span class="guide-badge">⏱️ 12 min</span>
+                    </div>
+                </div>
+            </div>
+            <div class="guide-card-body">
+                <h3>SH2 Remake: Easter eggs, referencias y habitaciones secretas</h3>
+                <p>Bloober Team escondió decenas de referencias al original y al universo de Konami. Esta guía cubre el cuarto de la cadena en el Woodside, el televisor con interferencias, los códigos Morse en las paredes del laberinto y las habitaciones que solo aparecen en segundas partidas.</p>
+                <a href="#" class="read-more-small">Leer guía →</a>
+            </div>
+        </article>
+
+        <article class="guide-card">
+            <div class="guide-card-header">
+                <div class="guide-emoji-box">⚔️</div>
+                <div>
+                    <span class="guide-type-tag type-trucos">Combate</span>
+                    <div class="guide-info-row">
+                        <span class="guide-badge dif-easy">Dificultad: Fácil</span>
+                        <span class="guide-badge">⏱️ 8 min</span>
+                    </div>
+                </div>
+            </div>
+            <div class="guide-card-body">
+                <h3>SH2 Remake: Cómo vencer a Pyramid Head sin perder vida</h3>
+                <p>Los dos encuentros con Pyramid Head no requieren daño si conoces sus patrones. Esta guía cubre los movimientos telegráficos de la Gran Espada, los puntos ciegos de la habitación del frigorifico y la estrategia de esquiva perfecta para ambos enfrentamientos.</p>
+                <a href="#" class="read-more-small">Leer guía →</a>
+            </div>
+        </article>
+
+    </div>
+
+    <h2 class="divider-title">🔭 Phasmophobia</h2>
+    <div class="guide-grid-full">
+
+        <article class="guide-card">
+            <div class="guide-card-header">
+                <div class="guide-emoji-box">📡</div>
+                <div>
+                    <span class="guide-type-tag type-fantasmas">Guía de fantasmas</span>
+                    <div class="guide-info-row">
+                        <span class="guide-badge dif-medium">Dificultad: Media</span>
+                        <span class="guide-badge">⏱️ 22 min</span>
+                    </div>
+                </div>
+            </div>
+            <div class="guide-card-body">
+                <h3>Tabla de evidencias actualizada v2.5: los 24 tipos de fantasma</h3>
+                <p>La guía de referencia definitiva post-actualización Vestige. Incluye evidencias primarias, evidencias secundarias únicas de cada fantasma (velocidad en persecución, comportamiento en caza, reacción a la sal), y estrategias específicas para Pesadilla donde solo obtienes dos evidencias.</p>
+                <a href="#" class="read-more-small">Leer guía →</a>
+            </div>
+        </article>
+
+        <article class="guide-card">
+            <div class="guide-card-header">
+                <div class="guide-emoji-box">🏠</div>
+                <div>
+                    <span class="guide-type-tag type-mapa">Mapas</span>
+                    <div class="guide-info-row">
+                        <span class="guide-badge dif-easy">Dificultad: Fácil</span>
+                        <span class="guide-badge">⏱️ 14 min</span>
+                    </div>
+                </div>
+            </div>
+            <div class="guide-card-body">
+                <h3>Guía de cada mapa: zonas de favorito del fantasma y rutas de escape</h3>
+                <p>Cubre los 10 mapas del juego con anotaciones sobre los cuartos más frecuentes de actividad fantasmal, puntos de fusible alternativos, rutas de escape sin cruzar al fantasma y ubicaciones de generadores que no requieren adentrarse en la estructura.</p>
+                <a href="#" class="read-more-small">Leer guía →</a>
+            </div>
+        </article>
+
+        <article class="guide-card">
+            <div class="guide-card-header">
+                <div class="guide-emoji-box">💰</div>
+                <div>
+                    <span class="guide-type-tag type-trucos">Dinero rápido</span>
+                    <div class="guide-info-row">
+                        <span class="guide-badge dif-easy">Dificultad: Fácil</span>
+                        <span class="guide-badge">⏱️ 9 min</span>
+                    </div>
+                </div>
+            </div>
+            <div class="guide-card-body">
+                <h3>Cómo ganar dinero rápido en Phasmophobia: objetivos opcionales y retos diarios</h3>
+                <p>Los objetivos opcionales pueden triplicar el pago de una misión. Esta guía prioriza cuáles completar primero, cómo usar el tablero espíritu de forma eficiente y qué retos diarios son rentables sin exponerse innecesariamente al fantasma.</p>
+                <a href="#" class="read-more-small">Leer guía →</a>
+            </div>
+        </article>
+
+    </div>
+
+    <h2 class="divider-title">🧟 Dead Space</h2>
+    <div class="guide-grid-full">
+
+        <article class="guide-card">
+            <div class="guide-card-header">
+                <div class="guide-emoji-box">🔧</div>
+                <div>
+                    <span class="guide-type-tag type-trucos">Supervivencia</span>
+                    <div class="guide-info-row">
+                        <span class="guide-badge dif-hard">Dificultad: Alta</span>
+                        <span class="guide-badge">⏱️ 16 min</span>
+                    </div>
+                </div>
+            </div>
+            <div class="guide-card-body">
+                <h3>Dead Space Remake: Guía de supervivencia en Imposible — sin morir ni una vez</h3>
+                <p>El modo Imposible elimina los guardados intermedios: una sola muerte borra tu partida. Esta guía explica qué nodos de poder invertir primero, cómo gestionar el plasma cutter para no quedarse sin munición, qué Necromorfos ignorar y cuáles eliminar inmediatamente para sobrevivir.</p>
+                <a href="#" class="read-more-small">Leer guía →</a>
+            </div>
+        </article>
+
+        <article class="guide-card">
+            <div class="guide-card-header">
+                <div class="guide-emoji-box">🗝️</div>
+                <div>
+                    <span class="guide-type-tag type-secretos">Secretos</span>
+                    <div class="guide-info-row">
+                        <span class="guide-badge dif-medium">Dificultad: Media</span>
+                        <span class="guide-badge">⏱️ 11 min</span>
+                    </div>
+                </div>
+            </div>
+            <div class="guide-card-body">
+                <h3>Dead Space Remake: Todas las trajes secretos y cómo desbloquear el traje Ignition</h3>
+                <p>El remake añade nuevas localizaciones de nodos de traje respecto al original. Guía completa de los 12 trajes disponibles, incluyendo el Traje de Seguridad vintage, el traje de Vigilante y el secreto Traje Ignition que requiere completar el modo alternativo New Game+.</p>
+                <a href="#" class="read-more-small">Leer guía →</a>
+            </div>
+        </article>
+
+        <article class="guide-card">
+            <div class="guide-card-header">
+                <div class="guide-emoji-box">🎯</div>
+                <div>
+                    <span class="guide-type-tag type-completa">Guía completa</span>
+                    <div class="guide-info-row">
+                        <span class="guide-badge dif-medium">Dificultad: Media</span>
+                        <span class="guide-badge">⏱️ 30 min</span>
+                    </div>
+                </div>
+            </div>
+            <div class="guide-card-body">
+                <h3>Dead Space Remake: Guía al 100% — todos los logros, coleccionables y final alternativo</h3>
+                <p>La guía más exhaustiva del remake. Cubre los 42 grabaciones de texto y voz, las 3 armas secretas, el sistema de nodos de poder óptimo para cada arma, el trofeo/logro de "ojo de halcón" y las condiciones para desbloquear el final alternativo en New Game+.</p>
+                <a href="#" class="read-more-small">Leer guía →</a>
+            </div>
+        </article>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Terror Digital - Blog de Videojuegos de Horror</p>
+        <p>El miedo es solo el principio...</p>
+    </footer>
+</div>
+
+<script src="../js/script.js"></script>
+<script src="../js/header.js"></script>
+<script src="../js/articles_db.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        loadArticlesList('guias', 9, 'articles-container');
+    });
+</script>
+</body>
+</html>

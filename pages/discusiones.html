@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discusiones - TERROR DIGITAL</title>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Nosifer&family=Crimson+Text:wght@400;600;700&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+<div class="grain"></div>
+<div class="container">
+    <header></header>
+
+    <div class="page-header">
+        <h1 class="section-title">Foro de Discusiones</h1>
+        <p class="page-description">Comparte tus teorías, experiencias y opiniones sobre el mundo del terror gaming</p>
+    </div>
+
+    <div class="discussions-section" style="border-top:none;margin-top:0;padding-top:0;">
+        <div class="discussion-container">
+
+            <div class="game-selector">
+                <label for="game-select">🎮 Selecciona un juego:</label>
+                <select id="game-select" onchange="loadDiscussions()">
+                    <option value="">Cargando juegos...</option>
+                </select>
+            </div>
+
+            <div class="discussion-threads" id="threads-container">
+                <p style="text-align:center;color:#999;padding:2rem;">Selecciona un juego para ver las discusiones.</p>
+            </div>
+
+            <div class="comment-form">
+                <h4>💬 Iniciar Nueva Discusión</h4>
+                <form id="discussion-form" onsubmit="submitDiscussion(event)">
+                    <div class="form-group">
+                        <label>Tu nombre:</label>
+                        <input type="text" id="username" placeholder="Tu nombre o alias" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Título del tema:</label>
+                        <input type="text" id="thread-title" placeholder="Ej: ¿Cuál es el mejor final de Silent Hill 2?" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Tu mensaje:</label>
+                        <textarea id="comment" placeholder="Comparte tu opinión, teoría o experiencia..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">🔥 Publicar discusión</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de comentarios -->
+    <div id="comments-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeCommentsModal()">&times;</span>
+            <h3 id="modal-thread-title"></h3>
+            <div id="modal-thread-content"></div>
+            <div class="comments-section">
+                <h4>💬 Comentarios (<span id="comment-count">0</span>)</h4>
+                <div id="comments-list"></div>
+                <div class="add-comment">
+                    <h4>Agregar comentario</h4>
+                    <form id="comment-form" onsubmit="addComment(event)">
+                        <div class="form-group">
+                            <label>Tu nombre:</label>
+                            <input type="text" id="comment-username" placeholder="Tu nombre o alias" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Comentario:</label>
+                            <textarea id="comment-text" placeholder="Escribe tu comentario..." required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Publicar comentario</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Terror Digital - Blog de Videojuegos de Horror</p>
+        <p>El miedo es solo el principio...</p>
+    </footer>
+</div>
+
+<script src="../js/script.js"></script>
+<script src="../js/header.js"></script>
+<script src="../js/discusiones_db.js"></script>
+<script>
+// Cargar juegos en el select al iniciar
+async function cargarJuegos() {
+    try {
+        const res   = await fetch('../php/api_general.php?action=list');
+        const juegos = await res.json();
+        const sel   = document.getElementById('game-select');
+        if (!juegos.length) {
+            sel.innerHTML = '<option value="">No hay juegos disponibles</option>';
+            return;
+        }
+        sel.innerHTML = juegos.map(j =>
+            `<option value="${j.slug}">${j.nombre}</option>`
+        ).join('');
+        // Cargar discusiones del primer juego automáticamente
+        loadDiscussions();
+    } catch(e) {
+        document.getElementById('game-select').innerHTML =
+            '<option value="">Error al cargar juegos</option>';
+    }
+}
+document.addEventListener('DOMContentLoaded', cargarJuegos);
+</script>
+</body>
+</html>
