@@ -1,33 +1,3 @@
-<?php
-require_once '../config/auth.php';
-$auth->requireRole('editor');
-$user = $auth->getCurrentUser();
-$flash = getFlashMessage();
-
-try {
-    $db = getDB();
-    $totalArticulos  = $db->query("SELECT COUNT(*) FROM articulos  WHERE publicado = TRUE")->fetchColumn();
-    $totalBorradores = $db->query("SELECT COUNT(*) FROM articulos  WHERE publicado = FALSE")->fetchColumn();
-    $totalDiscus     = $db->query("SELECT COUNT(*) FROM discusiones WHERE aprobado = TRUE")->fetchColumn();
-    $totalUsuarios   = $db->query("SELECT COUNT(*) FROM usuarios   WHERE activo = TRUE")->fetchColumn();
-} catch (Exception $e) {
-    $totalArticulos = $totalBorradores = $totalDiscus = $totalUsuarios = '—';
-}
-
-try {
-    $ultimosArticulos = $db->query("
-        SELECT a.id, a.titulo, a.slug, a.publicado, a.fecha_publicacion, a.vistas,
-               c.nombre as categoria, u.nombre_completo as autor
-        FROM articulos a
-        LEFT JOIN categorias c ON a.categoria_id = c.id
-        LEFT JOIN usuarios   u ON a.autor_id = u.id
-        ORDER BY a.fecha_publicacion DESC
-        LIMIT 10
-    ")->fetchAll();
-} catch (Exception $e) {
-    $ultimosArticulos = [];
-}
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
