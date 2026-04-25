@@ -3,139 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Admin - TERROR DIGITAL</title>
+    <title>TERROR DIGITAL - Blog de Videojuegos de Horror</title>
     <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Nosifer&family=Crimson+Text:wght@400;600;700&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-<div class="grain"></div>
+    <div class="grain"></div>
+    
+    <div class="container">
+        <header>
+            <h1 class="logo glitch"><a href="index.html">TERROR DIGITAL</a></h1>
+            <p class="tagline">El Horror Nunca Duerme</p>
+            <nav>
+                <a href="pages/noticias.html">Noticias</a>
+                <a href="pages/reviews.html">Reviews</a>
+                <a href="pages/guias.html">Guías</a>
+                <a href="pages/discusiones.html">Discusiones</a>
+                <a href="pages/comunidad.html">Comunidad</a>
+            </nav>
+        </header>
 
-<div class="admin-layout">
-    <?php include 'partials/sidebar.php'; ?>
-    <main class="admin-main">
+        <!-- ARTÍCULO DESTACADO: se carga dinámicamente; si falla, se muestra este estático -->
+        <section class="featured">
+            <article class="featured-article" id="featured-main">
+                <div class="featured-image">
+                    <!-- Si hay imagen real: <img src="uploads/NOMBRE.jpg" alt=""> -->
+                    <!-- Si no hay imagen se muestra el emoji de placeholder -->
+                    <span class="thumb-emoji">👻</span>
+                </div>
+                <div class="featured-content" id="featured-content">
+                    <span class="category-tag">Destacado</span>
+                    <h2>Silent Hill 2 Remake: El Terror Psicológico Renace</h2>
+                    <p class="meta">Por Admin Terror | 10 de Febrero, 2026 | 234 comentarios</p>
+                    <p class="excerpt">
+                        Bloober Team ha logrado lo imposible: recrear la atmósfera opresiva y perturbadora del clásico de Konami. 
+                        Exploramos cada rincón de la niebla para traerte el análisis más completo del remake más esperado del año.
+                    </p>
+                    <a href="pages/articulo.html?id=silent-hill-2" class="read-more">Leer análisis completo →</a>
+                </div>
+            </article>
 
-        <?php if ($flash): ?>
-        <div class="alert alert-<?= $flash['type'] === 'error' ? 'error' : 'success' ?>">
-            <?= htmlspecialchars($flash['message']) ?>
-        </div>
-        <?php endif; ?>
-
-        <div class="admin-header">
-            <div>
-                <h1>🏠 Dashboard</h1>
-                <p>Bienvenido, <?= htmlspecialchars($user['nombre_completo'] ?? $user['username']) ?></p>
+            <div class="sidebar-news">
+                <article class="news-item">
+                    <span class="category-tag">Breaking News</span>
+                    <h3>Anunciado nuevo DLC para Resident Evil Village</h3>
+                    <p class="meta">Hace 2 horas</p>
+                    <p class="excerpt">Capcom sorprende con contenido adicional protagonizado por Lady Dimitrescu...</p>
+                    <a href="pages/articulo.html?id=re-village-dlc" class="read-more-small">Leer más →</a>
+                </article>
+                <article class="news-item">
+                    <span class="category-tag">Actualización</span>
+                    <h3>Phasmophobia recibe modo pesadilla</h3>
+                    <p class="meta">Hace 5 horas</p>
+                    <p class="excerpt">El popular juego de fantasmas aumenta la dificultad con nuevos desafíos...</p>
+                    <a href="pages/articulo.html?id=phasmophobia-update" class="read-more-small">Leer más →</a>
+                </article>
+                <article class="news-item">
+                    <span class="category-tag">Indie</span>
+                    <h3>Descubre: The Mortuary Assistant</h3>
+                    <p class="meta">Hace 1 día</p>
+                    <p class="excerpt">Este simulador de embalsamamiento esconde secretos terroríficos...</p>
+                    <a href="pages/articulo.html?id=mortuary-assistant" class="read-more-small">Leer más →</a>
+                </article>
             </div>
-            <a href="../index.html" target="_blank" class="btn-sm">Ver sitio →</a>
-        </div>
+        </section>
 
-        <div class="admin-stats">
-            <div class="admin-stat-card">
-                <div class="big"><?= $totalArticulos ?></div>
-                <div class="label">Artículos publicados</div>
+        <section class="latest-section" id="noticias">
+            <h2 class="section-title">Últimas Noticias del Inframundo</h2>
+            <div class="articles-grid" id="articles-container">
+                <!-- Las tarjetas se reemplazan dinámicamente; estas son el fallback estático -->
+                <article class="article-card">
+                    <div class="article-thumbnail"><span class="thumb-emoji">🎮</span></div>
+                    <div class="article-body">
+                        <span class="category-tag">Preview</span>
+                        <h3>Alan Wake 3: Primeras Impresiones</h3>
+                        <p class="meta">8 de Febrero, 2026</p>
+                        <p class="excerpt">Remedy Entertainment nos adelanta lo que viene en la tercera entrega de la saga.</p>
+                        <a href="pages/articulo.html?id=alan-wake-3" class="read-more">Leer más →</a>
+                    </div>
+                </article>
+                <article class="article-card">
+                    <div class="article-thumbnail"><span class="thumb-emoji">🔪</span></div>
+                    <div class="article-body">
+                        <span class="category-tag">Review</span>
+                        <h3>Still Wakes the Deep: Terror en Alta Mar</h3>
+                        <p class="meta">6 de Febrero, 2026</p>
+                        <p class="excerpt">Una plataforma petrolera en los 70s se convierte en tu peor pesadilla.</p>
+                        <a href="pages/articulo.html?id=still-wakes" class="read-more">Leer más →</a>
+                    </div>
+                </article>
+                <article class="article-card">
+                    <div class="article-thumbnail"><span class="thumb-emoji">🧟</span></div>
+                    <div class="article-body">
+                        <span class="category-tag">Guía</span>
+                        <h3>Dead Space Remake: Guía de Supervivencia</h3>
+                        <p class="meta">5 de Febrero, 2026</p>
+                        <p class="excerpt">Consejos esenciales para sobrevivir a bordo del USG Ishimura.</p>
+                        <a href="pages/articulo.html?id=dead-space-guide" class="read-more">Leer más →</a>
+                    </div>
+                </article>
+                <article class="article-card">
+                    <div class="article-thumbnail"><span class="thumb-emoji">👁️</span></div>
+                    <div class="article-body">
+                        <span class="category-tag">Análisis</span>
+                        <h3>Los 10 Mejores Juegos de Terror de 2025</h3>
+                        <p class="meta">3 de Febrero, 2026</p>
+                        <p class="excerpt">Repasamos los títulos que nos quitaron el sueño el año pasado.</p>
+                        <a href="pages/articulo.html?id=top-10-2025" class="read-more">Leer más →</a>
+                    </div>
+                </article>
+                <article class="article-card">
+                    <div class="article-thumbnail"><span class="thumb-emoji">🏚️</span></div>
+                    <div class="article-body">
+                        <span class="category-tag">Especial</span>
+                        <h3>Outlast Trials: Cooperativo Aterrador</h3>
+                        <p class="meta">1 de Febrero, 2026</p>
+                        <p class="excerpt">El terror multiplayer alcanza nuevas cotas.</p>
+                        <a href="pages/articulo.html?id=outlast-trials" class="read-more">Leer más →</a>
+                    </div>
+                </article>
+                <article class="article-card">
+                    <div class="article-thumbnail"><span class="thumb-emoji">🕷️</span></div>
+                    <div class="article-body">
+                        <span class="category-tag">Indie</span>
+                        <h3>Lethal Company: El Fenómeno Indie</h3>
+                        <p class="meta">30 de Enero, 2026</p>
+                        <p class="excerpt">¿Por qué este juego se ha vuelto viral? Analizamos el éxito que conquista Steam.</p>
+                        <a href="pages/articulo.html?id=lethal-company" class="read-more">Leer más →</a>
+                    </div>
+                </article>
             </div>
-            <div class="admin-stat-card">
-                <div class="big"><?= $totalBorradores ?></div>
-                <div class="label">Borradores</div>
-            </div>
-            <div class="admin-stat-card">
-                <div class="big"><?= $totalDiscus ?></div>
-                <div class="label">Discusiones activas</div>
-            </div>
-            <div class="admin-stat-card">
-                <div class="big"><?= $totalUsuarios ?></div>
-                <div class="label">Usuarios activos</div>
-            </div>
-        </div>
+        </section>
 
-        <div class="admin-panel">
-            <h3>Acciones Rápidas</h3>
-            <div style="display:flex;gap:1rem;flex-wrap:wrap;">
-                <a href="nuevo_articulo.php"  class="btn btn-primary">✏️ Escribir artículo</a>
-                <a href="articulos.php"        class="btn btn-secondary">📋 Ver artículos</a>
-                <a href="discusiones.php"      class="btn btn-secondary">💬 Moderar discusiones</a>
-                <?php if ($auth->hasRole('admin')): ?>
-                <a href="usuarios.php"         class="btn btn-secondary">👥 Gestionar usuarios</a>
-                <a href="juegos.php"           class="btn btn-secondary">🎮 Gestionar juegos</a>
-                <?php endif; ?>
-            </div>
-        </div>
+        <footer>
+            <p>&copy; 2026 Terror Digital - Blog de Videojuegos de Horror</p>
+            <p>El miedo es solo el principio...</p>
+        </footer>
+    </div>
 
-        <div class="admin-panel">
-            <h3>Últimos Artículos</h3>
-            <?php if (empty($ultimosArticulos)): ?>
-                <p style="color:#999;">No hay artículos todavía. <a href="nuevo_articulo.php" style="color:var(--accent-crimson);">Crea el primero →</a></p>
-            <?php else: ?>
-            <div class="admin-table-wrap">
-                <table class="admin-table">
-                    <thead>
-                        <tr>
-                            <th>Título</th>
-                            <th>Categoría</th>
-                            <th>Autor</th>
-                            <th>Fecha</th>
-                            <th>Vistas</th>
-                            <th>Estado</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach ($ultimosArticulos as $art): ?>
-                        <tr>
-                            <td><?= htmlspecialchars($art['titulo']) ?></td>
-                            <td><?= htmlspecialchars($art['categoria'] ?? '—') ?></td>
-                            <td><?= htmlspecialchars($art['autor'] ?? '—') ?></td>
-                            <td><?= $art['fecha_publicacion'] ? date('d/m/Y', strtotime($art['fecha_publicacion'])) : '—' ?></td>
-                            <td><?= number_format($art['vistas']) ?></td>
-                            <td>
-                                <span class="badge <?= $art['publicado'] ? 'badge-published' : 'badge-draft' ?>">
-                                    <?= $art['publicado'] ? 'Publicado' : 'Borrador' ?>
-                                </span>
-                            </td>
-                            <td style="white-space:nowrap;">
-                                <a href="editar_articulo.php?id=<?= $art['id'] ?>" class="btn btn-sm btn-secondary">✏️ Editar</a>
-                                <?php if ($art['publicado']): ?>
-                                <a href="../pages/articulo.html?id=<?= $art['slug'] ?>" target="_blank" class="btn btn-sm btn-secondary">👁️ Ver</a>
-                                <?php endif; ?>
-                                <button onclick="eliminarArticulo(<?= $art['id'] ?>, this)" class="btn btn-sm btn-danger">🗑️</button>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
-            <?php endif; ?>
-        </div>
-
-    </main>
-</div>
-
-<script>
-function eliminarArticulo(id, btn) {
-    if (!confirm('¿Eliminar este artículo? Esta acción no se puede deshacer.')) return;
-    btn.disabled = true;
-    btn.textContent = '...';
-    fetch('ajax/eliminar_articulo.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `id=${id}`
-    })
-    .then(r => r.json())
-    .then(data => {
-        if (data.success) {
-            btn.closest('tr').remove();
-        } else {
-            alert(data.message || 'Error al eliminar');
-            btn.disabled = false;
-            btn.textContent = '🗑️';
-        }
-    })
-    .catch(() => {
-        alert('Error de conexión');
-        btn.disabled = false;
-        btn.textContent = '🗑️';
-    });
-}
-</script>
+    <script src="js/script.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/articles_db.js"></script>
 </body>
 </html>
